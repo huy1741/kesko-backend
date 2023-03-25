@@ -1,0 +1,23 @@
+{
+  "name": "kesko-backend",
+  "version": "1.0.0",
+  "description": "Backend for kesko app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Huy Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^8.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.1",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.5.0"
+  }
+}

@@ -23,11 +23,23 @@ function getAll() {
   };
 }
 function getProfuctInfo(orderId) {
-  const data = db.query(`SELECT Products.ProductName 
+  const singleOrder = db.query(
+    `
+  SELECT OrderID, Orders.CustomerID, Customers.ContactName,
+  ShippedDate, ShipAddress, ShipCity, 
+  ShipRegion, ShipPostalCode, ShipCountry 
+  FROM Orders, Customers
+  WHERE Orders.CustomerID = Customers.CustomerID AND Orders.OrderID=${orderId} `,
+    []
+  );
+  const data = singleOrder.map((item) => ({
+    ...item,
+    ProductList: db.query(`SELECT Products.ProductName 
   FROM [Order Details]
-    INNER JOIN Products
-    ON [Order Details].ProductID=Products.ProductID
-    WHERE [Order Details].OrderID=${orderId}`);
+  INNER JOIN Products
+  ON [Order Details].ProductID=Products.ProductID
+  WHERE [Order Details].OrderID=${orderId}`),
+  }));
   return {
     data,
   };
